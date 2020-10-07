@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import GoogleMap from 'google-map-react';
-import Marker from '../components/marker';
-import DoneMarker from '../components/doneMarker';
+import GoogleMapReact from 'google-map-react';
 import MyLoc from '@material-ui/icons/MyLocation';
 import {db, firebaseApp} from '../firebase';
 
 export default function Dispatch() {
-    const [markers, setMarkers] = useState([]);
+    const [heat, setHeat] = useState([]);
     const [center, setCenter] = useState("");
     const [zoom, setZoom]=useState(12);
     const [gradient, setGradient]=useState([
@@ -49,7 +47,7 @@ export default function Dispatch() {
 				return data;
 			})
 			.then((data) => {
-				setMarkers({
+				setHeat({
                     positions:data,
                     options:{
                         radius: 20,
@@ -73,7 +71,7 @@ export default function Dispatch() {
     if (center===""){
         return <h4><i>Getting Your Location...</i></h4>
     };
-    if (center!=="" && markers===[]){
+    if (center!=="" && heat===[]){
         return <h4><i>Setting Map...</i></h4>
     };
 
@@ -81,15 +79,15 @@ export default function Dispatch() {
 
     return (
         <div style = {{height: '100vh', width:'100%'}}>
-            {center!=="" &&  <GoogleMap
+            {center!=="" &&  <GoogleMapReact
                 bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg"}}
                 defaultCenter = {center}
                 defaultZoom = {zoom}
                 options={mapOptions}
                 heatmapLibrary={true}
-                heatmap = {markers}
+                heatmap = {heat}
             >
-                {center!==[] && markers && 
+                {center!==[] && heat && 
                     <div 
                         style={{width:'25px', height:'25px'}} 
                         lat={center.lat}
@@ -102,7 +100,7 @@ export default function Dispatch() {
                     </div>
                 }
 
-            </GoogleMap>}
+            </GoogleMapReact>}
         </div>
     )
 }
