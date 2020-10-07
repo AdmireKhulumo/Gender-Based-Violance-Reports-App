@@ -8,7 +8,7 @@ import { Link, Typography, Box } from "@material-ui/core";
 //pages
 import Dispatch from './pages/dispatch';
 import Login from './pages/login';
-import ForgotPassWord from './pages/forgotPassword';
+import ForgotPassword from './pages/forgotPassword';
 import Home from './pages/home2';
 import Navbar from './components/navbar';
 
@@ -24,7 +24,7 @@ export default function App() {
 							<Navbar />
 							<Switch>
 								<Route exact path="/login" component={Login} />
-                <Route exact path="/forgotPassword" component={ForgotPassWord} />
+                <Route exact path="/forgotPassword" component={ForgotPassword} />
                 <Route exact path="/" component={Home} />
 								<PrivateRoute exact path="/dispatch" component={Dispatch} />
 							</Switch>
