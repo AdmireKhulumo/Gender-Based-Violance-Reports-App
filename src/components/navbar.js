@@ -1,5 +1,5 @@
-
 import React from "react";
+import { withRouter, Redirect } from "react-router";
 import { firebaseApp } from "../firebase";
 
 //MUI
@@ -11,7 +11,8 @@ import {
 	CssBaseline,
 	useScrollTrigger,
 	Tooltip,
-	IconButton
+	IconButton,
+	Button
 } from "@material-ui/core";
 import SignOutIcon from "@material-ui/icons/ExitToApp";
 
@@ -23,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 		//color: "#000"
 	},
 	button: {
-		marginRight: theme.spacing(2)
+		marginRight: theme.spacing(2),
+		color:'#fff'
 	},
 	title: {
 		flexGrow: 1,
@@ -54,7 +56,7 @@ const LightTooltip = withStyles((theme) => ({
 	}
 }))(Tooltip);
 
-export default function MenuAppBar(props) {
+function Navbar(props) {
 	const classes = useStyles();
 	const [auth, setAuth] = React.useState(true);
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -75,9 +77,12 @@ export default function MenuAppBar(props) {
 								}}
 							>
 								<Typography variant="h5" className={classes.title}>
-									<strong> GBV Dispatch </strong>
+									<strong> {props.title} </strong>
 								</Typography>
 							</div>
+							<Button onClick={()=>{return <Redirect to={props.redirect}/>}} className={classes.button} >
+								{props.btn}
+							</Button>
 							<LightTooltip title="SIGN OUT" arrow>
 								<IconButton
 									edge="start"
@@ -96,4 +101,7 @@ export default function MenuAppBar(props) {
 			</React.Fragment>
 		</div>
 	);
-}
+};
+
+export default withRouter(Navbar);
+

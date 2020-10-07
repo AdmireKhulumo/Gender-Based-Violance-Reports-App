@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import GoogleMapReact from 'google-map-react';
 import MyLoc from '@material-ui/icons/MyLocation';
+import Navbar from '../components/navbar';
 import {db, firebaseApp} from '../firebase';
 
 export default function Dispatch() {
@@ -78,29 +79,32 @@ export default function Dispatch() {
 
 
     return (
-        <div style = {{height: '100vh', width:'100%'}}>
-            {center!=="" &&  <GoogleMapReact
-                bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg"}}
-                defaultCenter = {center}
-                defaultZoom = {zoom}
-                options={mapOptions}
-                heatmapLibrary={true}
-                heatmap = {heat}
-            >
-                {center!==[] && heat && 
-                    <div 
-                        style={{width:'25px', height:'25px'}} 
-                        lat={center.lat}
-                        lng={center.lng}>
+        <div>
+            <Navbar redirect='/dispatch' title='Danger Zones' btn='GO TO DISPATCH' />
+            <div style = {{height: '100vh', width:'100%'}}>
+                {center!=="" &&  <GoogleMapReact
+                    bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg", libraries:['visualization']}}
+                    defaultCenter = {center}
+                    defaultZoom = {zoom}
+                    options={mapOptions}
+                    heatmap = {heat}
+                >
+                    {center!==[] && heat && 
+                        <div 
+                            style={{width:'25px', height:'25px'}} 
+                            lat={center.lat}
+                            lng={center.lng}>
 
-                        <h5><i>YOU</i></h5>
-                        <MyLoc 
-                            style={{color: '#94e5ff'}}
-                        />
-                    </div>
-                }
+                            <h5><i>YOU</i></h5>
+                            <MyLoc 
+                                style={{color: '#94e5ff'}}
+                            />
+                        </div>
+                    }
 
-            </GoogleMapReact>}
+                </GoogleMapReact>}
+            </div>
         </div>
+
     )
 }

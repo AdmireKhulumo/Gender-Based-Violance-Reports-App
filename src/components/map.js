@@ -100,7 +100,7 @@ export default function Dispatch() {
     return (
         <div style = {{height: '100vh', width:'100%'}}>
             {center!=="" &&  <GoogleMap
-                bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg"}}
+                bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg", libraries:['visualization']}}
                 defaultCenter = {center}
                 defaultZoom = {zoom}
                 options={mapOptions}
