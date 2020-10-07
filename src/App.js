@@ -9,7 +9,7 @@ import { Link, Typography, Box } from "@material-ui/core";
 import Dispatch from './pages/dispatch';
 import Login from './pages/login';
 import ForgotPassWord from './pages/forgotPassword';
-import Home from './pages/home';
+import Home from './pages/home2';
 import Navbar from './components/navbar';
 
 //for Auth
@@ -25,7 +25,8 @@ export default function App() {
 							<Switch>
 								<Route exact path="/login" component={Login} />
                 <Route exact path="/forgotPassword" component={ForgotPassWord} />
-								<PrivateRoute exact path="/" component={Dispatch} />
+                <Route exact path="/dispatch" component={Dispatch} />
+								<PrivateRoute exact path="/" component={Home} />
 							</Switch>
 						</Router>
 					</AuthProvider>
@@ -40,7 +41,7 @@ function Copyright() {
 	return (
 		<div>
 			<Typography variant="body2" color="textSecondary" align="center">
-				Copyright © The Vision Group
+				Copyright © The Vision Group 
 				{new Date().getFullYear()}
 				{"."}
 			</Typography>
