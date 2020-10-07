@@ -26,7 +26,7 @@ export default function App() {
 								<Route exact path="/login" component={Login} />
                 <Route exact path="/forgotPassword" component={ForgotPassWord} />
                 <Route exact path="/" component={Home} />
-								<PrivateRoute exact path="/dipatch" component={Dispatch} />
+								<PrivateRoute exact path="/dispatch" component={Dispatch} />
 							</Switch>
 						</Router>
 					</AuthProvider>
