@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
+//styling
+import './App.css';
+import { Link, Typography, Box } from "@material-ui/core";
+
+//pages
+import Dispatch from './pages/dispatch';
+import Login from './pages/login';
+import ForgotPassWord from './pages/forgotPassword';
+import Home from './pages/home';
+import Navbar from './components/navbar';
+
+//for Auth
+import { AuthProvider } from "./auth/Auth";
+import PrivateRoute from "./auth/PrivateRoute";
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <AuthProvider>
+						<Router>
+							<Navbar />
+							<Switch>
+								<Route exact path="/login" component={Login} />
+                <Route exact path="/forgotPassword" component={ForgotPassWord} />
+								<PrivateRoute exact path="/" component={Dispatch} />
+							</Switch>
+						</Router>
+					</AuthProvider>
+					<Box mt={5}>
+						<Copyright />
+					</Box>
+				</div>
   );
 }
 
-export default App;
+function Copyright() {
+	return (
+		<div>
+			<Typography variant="body2" color="textSecondary" align="center">
+				Copyright © The Vision Group
+				{new Date().getFullYear()}
+				{"."}
+			</Typography>
+		</div>
+	);
+}
+
