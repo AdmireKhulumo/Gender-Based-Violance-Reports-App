@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter, Redirect } from "react-router";
 import { firebaseApp } from "../firebase";
+import {useRouter, Link} from 'react-router-dom';
 
 //MUI
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -80,9 +81,12 @@ function Navbar(props) {
 									<strong> {props.title} </strong>
 								</Typography>
 							</div>
-							<Button onClick={()=>{return <Redirect to={props.redirect}/>}} className={classes.button} >
-								{props.btn}
-							</Button>
+							<Link to='/' >
+								<Button className={classes.button} >
+									{props.btn}
+								</Button>
+							</Link>
+							
 							<LightTooltip title="SIGN OUT" arrow>
 								<IconButton
 									edge="start"

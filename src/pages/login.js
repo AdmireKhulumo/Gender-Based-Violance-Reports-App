@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router";
+import {useRouter, Link} from 'react-router-dom';
 import { firebaseApp } from "../firebase";
 import { AuthContext } from "../auth/Auth";
 import ForgotPassword from "./forgotPassword";
@@ -60,7 +61,7 @@ const Login = ({ history }) => {
 				await firebaseApp
 					.auth()
 					.signInWithEmailAndPassword(email.value, password.value);
-				history.push("/");
+				history.push("/dispatch");
 			} catch (error) {
 				//alert(error);
 				setMessage(
@@ -74,9 +75,10 @@ const Login = ({ history }) => {
 
 	const { currentUser } = useContext(AuthContext);
 
-	if (currentUser) {
-		return <Redirect to="/dispatch" />;
-	}
+	// if (currentUser) {
+	// 	return <Redirect to="/dispatch" />;
+	// 	history.push('/dispatch');
+	// }
 
 	//for dialogue
 	const handleClose = () => {
