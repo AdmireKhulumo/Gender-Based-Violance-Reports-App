@@ -68,7 +68,7 @@ export default function Dispatch() {
     //map options
     const mapOptions = maps=>{
         return{
-            styles:[{stylers: [{'visibility':'on'}]}]
+            styles:[{stylers: [{'visibility':'on'},{ 'lightness': 4 }]}]
         }
     };
 

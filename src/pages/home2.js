@@ -9,20 +9,28 @@ export default function Dispatch() {
     const [center, setCenter] = useState("");
     const [zoom, setZoom]=useState(12);
     const [gradient, setGradient]=useState([
-        "rgba(0, 255, 255, 0)",
-        "rgba(0, 255, 255, 1)",
-        "rgba(255, 248, 209, 1)",
-        "rgba(255, 199, 69, 1)",
-        "rgba(255, 140, 69, 1)",
-        "rgba(255, 115, 28, 1)",
-        "rgba(255, 109, 18, 1)",
-        "rgba(255, 108, 79, 1)",
-        "rgba(255, 91, 59, 1)",
-        "rgba(255, 79, 43, 1)",
-        "rgba(127, 55, 13, 1)",
-        "rgba(255, 42, 0, 1)",
-        "rgba(255, 0, 0, 1)",
-      ]);
+    //    "rgba(0, 255, 255, 0)",//cyan
+    //    "rgba(0, 255, 255, 0)",//cyan opaque
+        //"rgba(200, 255, 166, 0)",//light green
+       //"rgba(188, 247, 124, 1)",//opaqueish light green
+        "rgba(243, 247, 124, 0)",//light yellow
+        "rgba(243, 247, 124, 1)",//light yellow
+        "rgba(255, 247, 0, 1)",//bright yellow
+        "rgba(255, 199, 69, 1)",//light gold
+        "rgba(255, 140, 69, 1)",//peach
+       // "rgba(255, 115, 28, 1)",//strong peach
+        "rgba(255, 109, 18, 1)",//orange
+       // "rgba(255, 108, 79, 1)",//salmon red
+        "rgba(255, 91, 59, 1)",//strong salmon red
+        "rgba(255, 79, 43, 1)",//strong red orange
+        //"rgba(127, 55, 13, 1)",//brown
+        "rgba(255, 42, 0, 1)",//strong red
+        "rgba(255, 0, 0, 1)",//cherry red
+        "rgba(117, 0, 0, 1)",//dark maroon
+        //"rgba(79, 0, 0, 1)",//deep maroon brown
+        //"rgba(0, 0, 0, 1)",//black
+
+          ]);
 
     useEffect(() => {
         //get user's current location, position map to focus there
@@ -51,7 +59,7 @@ export default function Dispatch() {
 				setHeat({
                     positions:data,
                     options:{
-                        radius: 20,
+                        radius: 40,
                         opacity: 0.6,
                         gradient: gradient
                     }
@@ -64,7 +72,7 @@ export default function Dispatch() {
     //map options
     const mapOptions = maps=>{
         return{
-            styles:[{stylers: [{'visibility':'on'}]}]
+            styles:[{stylers: [{'visibility':'on'},{ 'lightness': 4 }]}]
         }
     };
 
@@ -82,12 +90,14 @@ export default function Dispatch() {
         <div>
             <Navbar redirect='/dispatch' title='Danger Zones' btn='GO TO DISPATCH' />
             <div style = {{height: '100vh', width:'100%'}}>
-                {center!=="" &&  <GoogleMapReact
+                {center!=="" &&  heat && <GoogleMapReact
                     bootstrapURLKeys={{key: "AIzaSyDE69V0fCSm3mQWkVSwXd_F7ptJQh9wzAg", libraries:['visualization']}}
                     defaultCenter = {center}
                     defaultZoom = {zoom}
                     options={mapOptions}
                     heatmap = {heat}
+                    heatmapLibrary={true}
+                    visibility={true}
                 >
                     {center!==[] && heat && 
                         <div 
@@ -103,6 +113,7 @@ export default function Dispatch() {
                     }
 
                 </GoogleMapReact>}
+
             </div>
         </div>
 
